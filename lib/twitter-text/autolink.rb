@@ -61,12 +61,13 @@ module Twitter
       # NOTE deprecate these attributes not options keys in options hash, then use html_attrs
       options = DEFAULT_OPTIONS.merge(options)
       options[:html_attrs] = extract_html_attrs_from_options!(options)
-      options[:html_attrs][:rel] ||= "nofollow" unless options[:suppress_no_follow]
+      #options[:html_attrs][:rel] ||= "nofollow" unless options[:suppress_no_follow]
 
       Twitter::Rewriter.rewrite_entities(text, entities) do |entity, chars|
-        if entity[:url]
-          link_to_url(entity, chars, options, &block)
-        elsif entity[:hashtag]
+        # if entity[:url]
+        #   link_to_url(entity, chars, options, &block)
+        # end
+        if entity[:hashtag]
           link_to_hashtag(entity, chars, options, &block)
         elsif entity[:screen_name]
           link_to_screen_name(entity, chars, options, &block)
